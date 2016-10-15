@@ -12,15 +12,9 @@ import org.springframework.web.client.RestTemplate;
 
 import com.appdirect.domain.ErrorCode;
 import com.appdirect.persistent.entities.User;
-import com.appdirect.rest.presentation.Account;
-import com.appdirect.rest.presentation.Company;
 import com.appdirect.rest.presentation.EventResponse;
-import com.appdirect.rest.presentation.SubscriptionCancelCreator;
 import com.appdirect.rest.presentation.SubscriptionCancelEvent;
-import com.appdirect.rest.presentation.SubscriptionCancelPayload;
-import com.appdirect.rest.presentation.SubscriptionOrderCreator;
 import com.appdirect.rest.presentation.SubscriptionOrderEvent;
-import com.appdirect.rest.presentation.SubscriptionOrderPayload;
 import com.appdirect.service.EventService;
 import com.appdirect.service.SubscriptionService;
 import com.appdirect.service.UserService;
@@ -59,21 +53,7 @@ public class SubscriptionController {
 		return eventResponse;
 	}
 	
-	@RequestMapping(value="/test",method=RequestMethod.GET)
-	public @ResponseBody SubscriptionOrderEvent getSubscriptionEvent(){
-			SubscriptionOrderEvent event = new SubscriptionOrderEvent();
-			Company company = new Company();
-			company.setName("Talentica");
-			SubscriptionOrderCreator creator = new SubscriptionOrderCreator();
-			SubscriptionOrderPayload payload = new SubscriptionOrderPayload();
-			payload.setCompany(company);
-			event.setPayload(payload);
-			creator.setOpenId("1255676");
-			creator.setFirstName("mounikaa");
-			event.setCreator(creator);
-		return event;
-	}
-	
+		
 	@RequestMapping(value="/cancel",method=RequestMethod.GET)
 	public @ResponseBody EventResponse cancelSubscription(@RequestParam("eventUrl") String eventUrl){
 		EventResponse eventResponse = null;
@@ -95,21 +75,6 @@ public class SubscriptionController {
 		return eventResponse;
 	}
 	
-	@RequestMapping(value="/cancelTest",method=RequestMethod.GET)
-	public @ResponseBody SubscriptionCancelEvent cancelSubscriptionEvent(){
-			SubscriptionCancelEvent event = new SubscriptionCancelEvent();
-			Company company = new Company();
-			company.setName("Talentica");
-			SubscriptionCancelCreator creator = new SubscriptionCancelCreator();
-			SubscriptionCancelPayload payload = new SubscriptionCancelPayload();
-			Account account = new Account();
-			account.setAccountIdentifier("402880e457c96ed10157c96f26cb0002");
-			payload.setAccount(account);
-			event.setPayload(payload);
-			creator.setOpenId("1255676");
-			creator.setFirstName("mounikaa");
-			event.setCreator(creator);
-		return event;
-	}
+	
 
 }
