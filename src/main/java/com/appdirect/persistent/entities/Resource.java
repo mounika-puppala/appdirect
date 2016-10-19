@@ -5,27 +5,19 @@ import java.io.Serializable;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.OneToOne;
 
 import org.hibernate.annotations.GenericGenerator;
 
-import com.appdirect.domain.SubscriptionStatus;
-
 @Entity
-public class Subscription implements Serializable {
+public class Resource implements Serializable {
 	private static final long serialVersionUID = 1L;
-
+	
 	@Id
 	@GeneratedValue(generator = "system-uuid")
 	@GenericGenerator(strategy = "uuid", name = "system-uuid")
 	private String id;
 
-	@JoinColumn(name = "userId")
-	@OneToOne
-	private User user;
-
-	private SubscriptionStatus status;
+	private String name;
 
 	public String getId() {
 		return id;
@@ -35,20 +27,12 @@ public class Subscription implements Serializable {
 		this.id = id;
 	}
 
-	public User getUser() {
-		return user;
+	public String getName() {
+		return name;
 	}
 
-	public void setUser(User user) {
-		this.user = user;
-	}
-
-	public SubscriptionStatus getStatus() {
-		return status;
-	}
-
-	public void setStatus(SubscriptionStatus status) {
-		this.status = status;
+	public void setName(String name) {
+		this.name = name;
 	}
 
 }
