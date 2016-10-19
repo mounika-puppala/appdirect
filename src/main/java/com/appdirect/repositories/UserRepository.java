@@ -10,6 +10,6 @@ public interface UserRepository extends CrudRepository<User,Integer>{
 
 	User findByOpenId(String openId);
 
-	User findByUserId(String accountIdentifier);
+	User findById(String accountIdentifier);
 
 }

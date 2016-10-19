@@ -21,7 +21,6 @@ public class EventServiceImpl implements EventService{
 	public User saveUser(SubscriptionOrderEvent event) {
 		User user = new User();
     	user.setOpenId(event.getCreator().getOpenId());
-	    user.setCompany(event.getPayload().getCompany().getName());
 	    user.setFirstName(event.getCreator().getFirstName());
 	    user.setLastName(event.getCreator().getLastName());
 

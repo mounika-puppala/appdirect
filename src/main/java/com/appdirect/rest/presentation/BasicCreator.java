@@ -1,21 +1,13 @@
 package com.appdirect.rest.presentation;
 
-public class SubscriptionCancelCreator {
-	private CancelAddress address;
+public class BasicCreator {
+
 	private String email;
 	private String firstName;
 	private String lastName;
 	private String language;
 	private String openId;
 	private String uuid;
-
-	public Address getAddress() {
-		return address;
-	}
-
-	public void setAddress(CancelAddress address) {
-		this.address = address;
-	}
 
 	public String getEmail() {
 		return email;

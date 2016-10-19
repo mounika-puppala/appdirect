@@ -28,7 +28,7 @@ public class UserServiceImpl implements UserService{
 
 	@Override
 	public User findById(String accountIdentifier) {
-		return repo.findByUserId(accountIdentifier);
+		return repo.findById(accountIdentifier);
 	}
 
 }

@@ -1,18 +1,14 @@
 package com.appdirect.rest.presentation;
 
 public abstract class Event {
-	private EventType type;
+	private String type;
 	private Marketplace marketplace;
 
-	public Event(EventType type) {
-		this.type = type;
-	}
-
-	public EventType getType() {
+	public String getType() {
 		return type;
 	}
 
-	public void setType(EventType type) {
+	public void setType(String type) {
 		this.type = type;
 	}
 

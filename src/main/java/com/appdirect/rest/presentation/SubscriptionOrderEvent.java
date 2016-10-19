@@ -2,26 +2,22 @@ package com.appdirect.rest.presentation;
 
 public class SubscriptionOrderEvent extends Event {
 
-	private SubscriptionOrderCreator creator;
-	private SubscriptionOrderPayload payload;
+	private OrderCreator creator;
+	private OrderPayload payload;
 
-	public SubscriptionOrderEvent() {
-		super(EventType.SUBSCRIPTION_ORDER);
-	}
-
-	public SubscriptionOrderCreator getCreator() {
+	public OrderCreator getCreator() {
 		return creator;
 	}
 
-	public void setCreator(SubscriptionOrderCreator creator) {
+	public void setCreator(OrderCreator creator) {
 		this.creator = creator;
 	}
 
-	public SubscriptionOrderPayload getPayload() {
+	public OrderPayload getPayload() {
 		return payload;
 	}
 
-	public void setPayload(SubscriptionOrderPayload payload) {
+	public void setPayload(OrderPayload payload) {
 		this.payload = payload;
 	}
 

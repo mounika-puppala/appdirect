@@ -1,15 +1,15 @@
 package com.appdirect.rest.presentation;
 
-public class SubscriptionOrderPayload {
-	private Company company;
+public class ChangePayload {
+	private Account account;
 	private Order order;
 
-	public Company getCompany() {
-		return company;
+	public Account getAccount() {
+		return account;
 	}
 
-	public void setCompany(Company company) {
-		this.company = company;
+	public void setAccount(Account account) {
+		this.account = account;
 	}
 
 	public Order getOrder() {

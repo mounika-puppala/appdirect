@@ -9,6 +9,7 @@ import com.appdirect.domain.SubscriptionStatus;
 import com.appdirect.persistent.entities.Subscription;
 import com.appdirect.persistent.entities.User;
 import com.appdirect.repositories.SubcriptionRepository;
+import com.appdirect.rest.presentation.SubscriptionChangeEvent;
 import com.appdirect.service.SubscriptionService;
 
 
@@ -36,6 +37,13 @@ public class SubscriptionServiceImpl  implements SubscriptionService{
 	public Subscription cancelSubscription(User user) {
 		Subscription sub = repo.findByUser(user);
 		sub.setStatus(SubscriptionStatus.CANCELLED);
+		return save(sub);
+	}
+
+	@Override
+	public Subscription changeSubscription(User user, SubscriptionChangeEvent event) {
+		Subscription sub = repo.findByUser(user);
+		sub.setStatus(SubscriptionStatus.valueOf(event.getPayload().getAccount().getStatus()));
 		return save(sub);
 	}
 

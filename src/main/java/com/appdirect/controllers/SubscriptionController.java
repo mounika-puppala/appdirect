@@ -14,6 +14,7 @@ import com.appdirect.domain.ErrorCode;
 import com.appdirect.persistent.entities.User;
 import com.appdirect.rest.presentation.EventResponse;
 import com.appdirect.rest.presentation.SubscriptionCancelEvent;
+import com.appdirect.rest.presentation.SubscriptionChangeEvent;
 import com.appdirect.rest.presentation.SubscriptionOrderEvent;
 import com.appdirect.service.EventService;
 import com.appdirect.service.SubscriptionService;
@@ -42,7 +43,7 @@ public class SubscriptionController {
 			if(userService.findByOpenId(event.getCreator().getOpenId())==null){
 				User user = eventService.saveUser(event);
 				subscriptionService.createSubscription(user);
-				eventResponse = new EventResponse(Boolean.TRUE.toString(),user.getUserId(),null,"Subscription Order is Successful");
+				eventResponse = new EventResponse(Boolean.TRUE.toString(),user.getId(),null,"Subscription Order is Successful");
 			}else{
 				eventResponse = new EventResponse(Boolean.FALSE.toString(),null,ErrorCode.USER_ALREADY_EXISTS.toString(),"Subscription Order failed");
 			}
@@ -64,9 +65,30 @@ public class SubscriptionController {
 			User user = userService.findById(event.getPayload().getAccount().getAccountIdentifier());
 			if(user!=null){
 				subscriptionService.cancelSubscription(user);
-				eventResponse = new EventResponse(Boolean.TRUE.toString(),user.getUserId(),null,"Subscription Cancellation is Successful");
+				eventResponse = new EventResponse(Boolean.TRUE.toString(),user.getId(),null,"Subscription Cancellation is Successful");
 			}else{
 				eventResponse = new EventResponse(Boolean.FALSE.toString(),null,ErrorCode.USER_NOT_FOUND.toString(),"Subscription Cancellation failed");
+			}
+		}catch(Exception e){
+			e.printStackTrace();
+			eventResponse = new EventResponse(Boolean.FALSE.toString(),null,null,e.getMessage());
+		}
+		return eventResponse;
+	}
+	
+	@RequestMapping(value = "/change", method = RequestMethod.GET)
+	public @ResponseBody EventResponse changeSubscription(@RequestParam("eventUrl") String eventUrl){
+		EventResponse eventResponse = null;
+		try{
+			URL url = new URL(eventUrl);
+			RestTemplate restTemplate = new RestTemplate();
+			SubscriptionChangeEvent event = restTemplate.getForObject(url.toURI(), SubscriptionChangeEvent.class);
+			User user = userService.findById(event.getPayload().getAccount().getAccountIdentifier());
+			if(user!=null){
+				subscriptionService.changeSubscription(user,event);
+				eventResponse = new EventResponse(Boolean.TRUE.toString(),user.getId(),null,"Subscription Change is Successful");
+			}else{
+				eventResponse = new EventResponse(Boolean.FALSE.toString(),null,ErrorCode.USER_NOT_FOUND.toString(),"Subscription Change failed");
 			}
 		}catch(Exception e){
 			e.printStackTrace();

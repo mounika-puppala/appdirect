@@ -1,6 +1,6 @@
 package com.appdirect.rest.presentation;
 
-public class SubscriptionCancelPayload {
+public class CancelPayload {
 	Account account;
 
 	public Account getAccount() {
