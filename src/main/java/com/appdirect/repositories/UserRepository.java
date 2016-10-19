@@ -8,8 +8,8 @@ import com.appdirect.persistent.entities.User;
 @Repository
 public interface UserRepository extends CrudRepository<User,Integer>{
 
-	User findByOpenId(String openId);
+	public User findByOpenId(String openId);
 
-	User findById(String accountIdentifier);
+	public User findById(String accountIdentifier);
 
 }
